@@ -1,0 +1,143 @@
+= asciidoctor-yaml-value-loader
+:doctype: book
+:idprefix:
+:idseparator: -
+:toc: left
+:toclevels: 4
+ifndef::env-github[:icons: font]
+ifdef::env-github[]
+:status:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+An https://asciidoctor.org/[asciidoctor] extention that loads specified YAML value
+from specified YAML file as a text.
+
+This extention offers just one inline macro named `yaml-value`.
+
+== Installation
+
+This extension is published on https://rubygems.org/[RubyGems] as asciidoctor-yaml-value-loader.
+
+After adding it to your project's Gemfile or gemspec, you can install it by just running Bundler.
+
+Or install it directly:
+
+  $ gem install asciidoctor-yaml-value-loader
+
+== Notation
+
+This extension offers only one inline macro named `yaml-value`.
+
+It requires following two.
+
+- **A YAML file path to load**
+- **A path to the value within that YAML**
+
+You should give them to `yaml-value` inline macro,
+as a concatnated string in the order of above list with colon-separated format.
+
+Where:
+
+* **A YAML file path**
++
+Arbitrary character can be used as a path except `:`.
+
+* **A path to the value within the YAML**
++
+--
+You can specify object keys and array index with slash-separated format. +
+This extention dig into the YAML with them from root to child in order.
+
+Each key string is decoded as a URI component in advance,
+so that the `/` can be used as a part of key string.
+
+In such case you need to convert `/` to `%2F` manually in advance.
+
+TIP: If you use delimiter attribute, you can change delimiter from '/' to any character you specified.
+
+WARNING: A number is always recognized as Array index number, not key string of the Object.
+--
+
+
+
+=== Sample
+
+If following YAML file are given.
+
+[source,json]
+.a.json
+----
+{
+  "abc": "def",
+  "ghi": [ 1, 2, 3 ],
+  "jkl": { "mno": 12345, "p/q": "rst" }
+}
+----
+
+You can load its arbitrary value by specifying it like this.
+
+[source,asciidoctor]
+----
+Object access: yaml-value:a.json:abc[].
+
+Array element access: yaml-value:a.json:ghi/2[].
+
+Array element itself: yaml-value:a.json:ghi[].
+
+Object itself: yaml-value:a.json:jkl[].
+
+Key that contains `.`: yaml-value:a.json:jkl/p%2Fq[].
+----
+
+It will be converted as follows.
+
+[source,asciidoctor]
+----
+Object access: def.
+
+Array element access: 3.
+
+Array element itself: [1,2,3].
+
+Object itself: {"mno":12345,"p/q":"rst"}.
+
+Key that contains `.`: rst.
+----
+
+== How to utilize
+
+=== CLI
+
+Use Asciidoctor's `--require` option like this:
+
+  $ asciidoctor -r asciidoctor-yaml-value-loader sample.adoc
+
+=== Ruby
+
+When you require this gem it automatically extend Asciidoctor
+so that `yaml-value` inline macro properly works.
+
+[source,ruby]
+----
+require 'asciidoctor'
+require 'asciidoctor-yaml-value-loader'
+
+Asciidoctor.convert_file 'sample.adoc', safe: :safe
+----
+
+== Change log
+
+* Verison 0.1.0 (2025/12/25)
++
+--
+Initial Version.
+--
+
+== LICENSE
+
+include::LICENSE[]

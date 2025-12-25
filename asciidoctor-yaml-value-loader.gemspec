@@ -1,0 +1,16 @@
+Gem::Specification.new do |s|
+  s.name        = "asciidoctor-yaml-value-loader"
+  s.version     = "0.2.1"
+  s.summary     = "An asciidoctor extention to load specific YAML value."
+  s.description = <<~EOS
+    Adds asciidoctor a funciton to load specific YAML value from YAML file
+
+    (See: https://github.com/msr1k/asciidoctor-yaml-value-loader)
+  EOS
+  s.authors     = ["msr1k"]
+  s.email       = "msr0210@gmail.com"
+  s.files       = Dir["lib/**/*.rb"]
+  s.homepage    = "https://github.com/msr1k/asciidoctor-yaml-value-loader"
+  s.license     = "MIT"
+  s.add_runtime_dependency 'asciidoctor'
+end

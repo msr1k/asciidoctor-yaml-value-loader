@@ -1,0 +1,19 @@
+
+Object access: yaml-value:a.json:abc[].
+
+Array element access: yaml-value:a.json:ghi/2[].
+
+Array element access with delimiter '.': yaml-value:c.json:ghi.2[delimiter='.'].
+
+Array element itself: yaml-value:a.json:ghi[].
+
+Object itself: yaml-value:a.json:jkl[].
+
+Key that contains `/`: yaml-value:a.json:jkl/p%2Fq[].
+
+Key that contains `.` with delimiter '.': yaml-value:c.json:jkl.p%2Eq[delimiter='.'].
+
+File under the directory b: yaml-value:b/b.json:b/c[].
+
+No value (Warning error output will appear): yaml-value:a.json:xyz[].
+
