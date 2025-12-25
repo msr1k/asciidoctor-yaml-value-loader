@@ -35,7 +35,9 @@ class YamlValueLoaderInlineMacro < Asciidoctor::Extensions::InlineMacroProcessor
     end
 
     filepath = File.join(dir, path)
-    yaml = YAML.parse(File.open(File.join(dir, path), 'r:utf-8', &:read))
+    yaml = YAML.load(File.open(File.join(dir, path), 'r:utf-8', &:read))
+
+    p yaml
 
     content = yaml.dig(*query)
     parent.logger.warn "yaml-value-loader: #{target} has no value." if content.nil?
@@ -46,7 +48,7 @@ class YamlValueLoaderInlineMacro < Asciidoctor::Extensions::InlineMacroProcessor
     when Numeric
       content.to_s
     else
-      YAML.generate(content)
+      YAML.dump(content)
     end
 
     create_inline_pass parent, content, attributes: { 'subs' => :normal } 

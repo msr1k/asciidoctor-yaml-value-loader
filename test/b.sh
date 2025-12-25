@@ -1,1 +1,1 @@
-asciidoctor -r asciidoctor-json-value-loader b/b.adoc
+asciidoctor -r asciidoctor-yaml-value-loader b/b.adoc

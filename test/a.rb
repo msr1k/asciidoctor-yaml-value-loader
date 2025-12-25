@@ -1,6 +1,6 @@
 require 'asciidoctor'
-# require 'asciidoctor-json-value-loader'
-require_relative '../lib/asciidoctor-json-value-loader'
+# require 'asciidoctor-yaml-value-loader'
+require_relative '../lib/asciidoctor-yaml-value-loader'
 
 Asciidoctor.convert_file 'a.adoc', safe: :safe
 
