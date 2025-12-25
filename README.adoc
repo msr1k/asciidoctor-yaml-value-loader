@@ -14,6 +14,12 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+> [!WARNING]  
+> Just copy https://github.com/msr1k/asciidoctor-json-value-loader and modify it from JSONs to YAMLs.
+> Currently tested **ONLY with JSON data**, which is compatible with YAML.
+> It has not been tested with actual YAML data..
+
+
 An https://asciidoctor.org/[asciidoctor] extention that loads specified YAML value
 from specified YAML file as a text.
 
