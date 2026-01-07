@@ -37,8 +37,6 @@ class YamlValueLoaderInlineMacro < Asciidoctor::Extensions::InlineMacroProcessor
     filepath = File.join(dir, path)
     yaml = YAML.load(File.open(File.join(dir, path), 'r:utf-8', &:read))
 
-    p yaml
-
     content = yaml.dig(*query)
     parent.logger.warn "yaml-value-loader: #{target} has no value." if content.nil?
 

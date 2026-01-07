@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "asciidoctor-yaml-value-loader"
-  s.version     = "0.1.0"
+  s.version     = "0.1.1"
   s.summary     = "An asciidoctor extention to load specific YAML value."
   s.description = <<~EOS
     Adds asciidoctor a funciton to load specific YAML value from YAML file
